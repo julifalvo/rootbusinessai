@@ -8,11 +8,31 @@ import {
 
 const VALID_SERVICE_VALUES = CONTACT_SERVICE_OPTIONS.map((option) => option.value);
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_FILL_TIME_MS = 1500;
+
+const SUCCESS_STATE: ContactFormState = {
+  status: "success",
+  message: "¡Gracias! Te contactaremos en menos de 24 horas hábiles.",
+};
 
 export async function submitContactRequest(
   _prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
+  // Honeypot: si un bot completó este campo invisible, fingimos éxito sin
+  // procesar nada, para no revelar que fue detectado.
+  const honeypot = String(formData.get("website") ?? "").trim();
+  if (honeypot) {
+    return SUCCESS_STATE;
+  }
+
+  // Un envío que llega casi instantáneamente después de que el form se
+  // renderizó es casi siempre un script, no una persona completando campos.
+  const renderedAt = Number(formData.get("renderedAt") ?? 0);
+  if (renderedAt && Date.now() - renderedAt < MIN_FILL_TIME_MS) {
+    return SUCCESS_STATE;
+  }
+
   const name = String(formData.get("name") ?? "").trim();
   const company = String(formData.get("company") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
@@ -63,8 +83,5 @@ export async function submitContactRequest(
     );
   }
 
-  return {
-    status: "success",
-    message: "¡Gracias! Te contactaremos en menos de 24 horas hábiles.",
-  };
+  return SUCCESS_STATE;
 }

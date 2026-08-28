@@ -103,6 +103,7 @@ export default function ContactForm() {
   );
   const [values, setValues] = useState<Record<FieldName, string>>(EMPTY_VALUES);
   const [touched, setTouched] = useState<Partial<Record<FieldName, boolean>>>({});
+  const [renderedAt] = useState(() => Date.now());
 
   if (state.status === "success") {
     return (
@@ -145,6 +146,17 @@ export default function ContactForm() {
           {state.message}
         </p>
       )}
+
+      {/* Honeypot: invisible para personas, atractivo para bots que autocompletan todo. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden"
+      />
+      <input type="hidden" name="renderedAt" value={renderedAt} />
 
       <div className="grid gap-5 sm:grid-cols-2">
         <FieldWrapper
