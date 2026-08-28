@@ -10,7 +10,7 @@ const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://rootbusinessai.com";
+const siteUrl = "https://rootbusinessai.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
