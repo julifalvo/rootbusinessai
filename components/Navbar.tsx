@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 const NAV_LINKS = [
   { label: "Servicios", href: "#servicios" },
   { label: "Casos de Éxito", href: "#casos-de-exito" },
+  { label: "Demos", href: "#demos" },
   { label: "Arquitectura Agéntica", href: "#arquitectura-agentica" },
   { label: "Contacto", href: "#contacto" },
 ];
