@@ -50,13 +50,29 @@ export async function submitContactRequest(
     };
   }
 
-  console.info("[contacto] Nueva solicitud de consultoría", {
-    name,
-    company,
-    email,
-    service,
-    message,
-  });
+  const payload = { name, company, email, service, message };
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+
+  if (webhookUrl) {
+    try {
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.error(
+        "[contacto] No se pudo registrar la solicitud en Sheets",
+        error,
+        payload
+      );
+    }
+  } else {
+    console.warn(
+      "[contacto] GOOGLE_SHEETS_WEBHOOK_URL no configurada; solicitud no persistida",
+      payload
+    );
+  }
 
   return {
     status: "success",
