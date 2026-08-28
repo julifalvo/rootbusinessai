@@ -78,8 +78,16 @@ export function RobotHead({
     }
 
     if (bodyRef.current) {
-      bodyRef.current.position.y = Math.sin(t * 0.7) * 0.08 - scroll * 0.4;
-      const targetScale = scale * (1 - scroll * 0.32);
+      // En viewports angostos/verticales, el bloque de texto del Hero es
+      // más alto y tapa el centro del canvas: bajamos el robot para que
+      // asome debajo en vez de quedar escondido detrás del título.
+      const aspect = state.size.width / state.size.height;
+      const portraitShift = aspect < 1 ? (1 - aspect) * 2.05 : 0;
+      const portraitScale = aspect < 1 ? 1 - Math.min(1 - aspect, 0.6) * 0.4 : 1;
+
+      bodyRef.current.position.y =
+        Math.sin(t * 0.7) * 0.08 - scroll * 0.4 - portraitShift;
+      const targetScale = scale * portraitScale * (1 - scroll * 0.32);
       bodyRef.current.scale.setScalar(
         THREE.MathUtils.damp(bodyRef.current.scale.x, targetScale, 4, delta)
       );
