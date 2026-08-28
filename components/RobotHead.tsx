@@ -102,12 +102,7 @@ export function RobotHead({
           smoothness={4}
           position={[0, 0.05, 0.67]}
         >
-          <meshStandardMaterial
-            color="#04070a"
-            emissive="#00f0ff"
-            emissiveIntensity={0.15}
-            roughness={0.2}
-          />
+          <meshBasicMaterial color="#050b0d" />
         </RoundedBox>
 
         <group ref={gazeRef} position={[0, 0.05, 0.72]}>
