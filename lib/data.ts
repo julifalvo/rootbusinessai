@@ -46,6 +46,21 @@ export const CONTACT_SERVICE_OPTIONS = [
   { value: "otro", label: "Otro" },
 ] as const;
 
+export type ContactFieldErrors = Partial<
+  Record<"name" | "company" | "email" | "service" | "message", string>
+>;
+
+export type ContactFormState = {
+  status: "idle" | "error" | "success";
+  message: string;
+  fieldErrors?: ContactFieldErrors;
+};
+
+export const initialContactState: ContactFormState = {
+  status: "idle",
+  message: "",
+};
+
 export type Project = {
   title: string;
   sector: string;

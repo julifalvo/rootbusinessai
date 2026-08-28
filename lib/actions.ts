@@ -1,21 +1,10 @@
 "use server";
 
-import { CONTACT_SERVICE_OPTIONS } from "@/lib/data";
-
-export type ContactFieldErrors = Partial<
-  Record<"name" | "company" | "email" | "service" | "message", string>
->;
-
-export type ContactFormState = {
-  status: "idle" | "error" | "success";
-  message: string;
-  fieldErrors?: ContactFieldErrors;
-};
-
-export const initialContactState: ContactFormState = {
-  status: "idle",
-  message: "",
-};
+import {
+  CONTACT_SERVICE_OPTIONS,
+  type ContactFieldErrors,
+  type ContactFormState,
+} from "@/lib/data";
 
 const VALID_SERVICE_VALUES = CONTACT_SERVICE_OPTIONS.map((option) => option.value);
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

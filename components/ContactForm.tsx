@@ -3,8 +3,8 @@
 import { type ReactNode, useActionState, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
-import { initialContactState, submitContactRequest } from "@/lib/actions";
-import { CONTACT_SERVICE_OPTIONS } from "@/lib/data";
+import { submitContactRequest } from "@/lib/actions";
+import { CONTACT_SERVICE_OPTIONS, initialContactState } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 type FieldName = "name" | "company" | "email" | "service" | "message";
