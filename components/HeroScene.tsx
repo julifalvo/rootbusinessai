@@ -6,8 +6,10 @@ import { RobotHead } from "@/components/RobotHead";
 
 export default function HeroScene({
   scrollProgress,
+  canvasOffsetY,
 }: {
   scrollProgress?: MotionValue<number>;
+  canvasOffsetY?: MotionValue<number>;
 }) {
   return (
     <Canvas
@@ -19,7 +21,7 @@ export default function HeroScene({
       <directionalLight position={[-3, 3, 4]} intensity={1.4} color="#00f0ff" />
       <directionalLight position={[3, -1, -3]} intensity={0.8} color="#7000ff" />
       <pointLight position={[0, 0.2, 2.4]} intensity={0.5} color="#ffffff" distance={4} />
-      <RobotHead scrollProgress={scrollProgress} />
+      <RobotHead scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} />
     </Canvas>
   );
 }

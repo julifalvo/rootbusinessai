@@ -21,11 +21,11 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-screen items-center overflow-hidden px-6 pt-32 pb-20"
+      className="relative flex min-h-svh items-center overflow-hidden px-6 pt-32 pb-20"
     >
       <div className="absolute inset-0 -z-20 bg-glow-gradient" />
       <motion.div style={{ y: canvasY }} className="absolute inset-0 -z-10">
-        <HeroCanvas scrollProgress={scrollYProgress} />
+        <HeroCanvas scrollProgress={scrollYProgress} canvasOffsetY={canvasY} />
       </motion.div>
 
       <motion.div

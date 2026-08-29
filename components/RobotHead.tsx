@@ -16,6 +16,8 @@ const ROBOT_TOP = 1.2;
 const ROBOT_BOTTOM = 0.75;
 const ROBOT_WIDTH = 2.15;
 const FIT_MARGIN = 0.88;
+// Aire mínimo (fracción del alto visible) entre el robot y el borde inferior.
+const SAFE_BOTTOM = 0.06;
 
 /**
  * Cabeza de robot construida enteramente con primitivas (sin assets
@@ -28,9 +30,12 @@ const FIT_MARGIN = 0.88;
 export function RobotHead({
   scale = 1,
   scrollProgress,
+  canvasOffsetY,
 }: {
   scale?: number;
   scrollProgress?: MotionValue<number>;
+  /** Traslación vertical (px) que el contenedor del canvas recibe por parallax. */
+  canvasOffsetY?: MotionValue<number>;
 }) {
   const bodyRef = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Group>(null);
@@ -103,13 +108,22 @@ export function RobotHead({
       );
       const targetScale = scale * fitScale * (1 - scroll * 0.32);
 
+      // El parallax del Hero baja el <div> del canvas mientras se scrollea y
+      // la sección recorta lo que sobresale: ese desplazamiento (en px) se
+      // descuenta del espacio realmente disponible abajo.
+      const clipped =
+        Math.max(0, canvasOffsetY?.get() ?? 0) * (viewH / state.size.height);
+
       // En viewports verticales el bloque de texto del Hero tapa el centro:
-      // bajamos el robot para que asome debajo, pero nunca más allá de lo
-      // que permite el borde inferior (antes se cortaba la mandíbula).
+      // bajamos el robot para que asome debajo, pero dejando aire hasta el
+      // borde inferior — pegado al borde, la sección siguiente lo corta.
       const wantedDrop = (aspect < 1 ? (1 - aspect) * 2.05 : 0) + scroll * 0.4;
       const maxDrop = Math.max(
         0,
-        viewH / 2 - ROBOT_BOTTOM * targetScale - Math.abs(float)
+        viewH * (0.5 - SAFE_BOTTOM) -
+          ROBOT_BOTTOM * targetScale -
+          Math.abs(float) -
+          clipped
       );
 
       bodyRef.current.position.y = float - Math.min(wantedDrop, maxDrop);
