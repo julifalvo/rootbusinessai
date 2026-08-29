@@ -9,6 +9,14 @@ import * as THREE from "three";
 const BLINK_CYCLE = 4.5;
 const BLINK_DURATION = 0.15;
 
+// Extensión del robot en unidades locales (escala 1): punta de la antena
+// arriba, base de la cabeza abajo y halos a los costados. Se usan para
+// encajarlo dentro del canvas sin recortes.
+const ROBOT_TOP = 1.2;
+const ROBOT_BOTTOM = 0.75;
+const ROBOT_WIDTH = 2.15;
+const FIT_MARGIN = 0.88;
+
 /**
  * Cabeza de robot construida enteramente con primitivas (sin assets
  * externos). Sigue el puntero (mouse o touch, R3F los unifica) con la
@@ -78,16 +86,33 @@ export function RobotHead({
     }
 
     if (bodyRef.current) {
-      // En viewports angostos/verticales, el bloque de texto del Hero es
-      // más alto y tapa el centro del canvas: bajamos el robot para que
-      // asome debajo en vez de quedar escondido detrás del título.
-      const aspect = state.size.width / state.size.height;
-      const portraitShift = aspect < 1 ? (1 - aspect) * 2.05 : 0;
-      const portraitScale = aspect < 1 ? 1 - Math.min(1 - aspect, 0.6) * 0.4 : 1;
+      // `viewport` da el alto/ancho visibles en unidades del mundo a la
+      // distancia de la cámara, así que podemos encajar el robot dentro
+      // del canvas sea cual sea el aspect ratio.
+      const { width: viewW, height: viewH } = state.viewport;
+      const aspect = viewW / viewH;
+      const float = Math.sin(t * 0.7) * 0.08;
 
-      bodyRef.current.position.y =
-        Math.sin(t * 0.7) * 0.08 - scroll * 0.4 - portraitShift;
-      const targetScale = scale * portraitScale * (1 - scroll * 0.32);
+      // Primero achicamos lo necesario para que quepa entero (alto y
+      // ancho) y recién después lo bajamos: en mobile el robot es más
+      // ancho que el viewport y se cortaba por los costados.
+      const fitScale = Math.min(
+        1,
+        (viewH * FIT_MARGIN) / (ROBOT_TOP + ROBOT_BOTTOM),
+        (viewW * FIT_MARGIN) / ROBOT_WIDTH
+      );
+      const targetScale = scale * fitScale * (1 - scroll * 0.32);
+
+      // En viewports verticales el bloque de texto del Hero tapa el centro:
+      // bajamos el robot para que asome debajo, pero nunca más allá de lo
+      // que permite el borde inferior (antes se cortaba la mandíbula).
+      const wantedDrop = (aspect < 1 ? (1 - aspect) * 2.05 : 0) + scroll * 0.4;
+      const maxDrop = Math.max(
+        0,
+        viewH / 2 - ROBOT_BOTTOM * targetScale - Math.abs(float)
+      );
+
+      bodyRef.current.position.y = float - Math.min(wantedDrop, maxDrop);
       bodyRef.current.scale.setScalar(
         THREE.MathUtils.damp(bodyRef.current.scale.x, targetScale, 4, delta)
       );
