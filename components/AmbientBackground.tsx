@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import ParticleFieldCanvas from "@/components/ParticleFieldCanvas";
 
 /**
  * Capa decorativa fija detrás de todo el sitio, con parallax real ligado
@@ -8,6 +9,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
  * externo lleva el `transform` de scroll (Framer Motion) y el interno la
  * animación idle por CSS — si compartieran el mismo elemento, la animación
  * CSS de `transform` ganaría la cascada y pisaría el parallax en JS.
+ *
+ * `ParticleFieldCanvas` se apila encima de los blobs (mismo z detrás del
+ * contenido): en hardware sin WebGL o con "reduce motion" simplemente no
+ * renderiza nada y los blobs CSS quedan como única ambientación.
  */
 export default function AmbientBackground() {
   const { scrollYProgress } = useScroll();
@@ -25,6 +30,9 @@ export default function AmbientBackground() {
       <motion.div style={{ y: yDown }} className="absolute bottom-0 left-0">
         <div className="h-72 w-72 animate-drift rounded-full bg-primary-glow/5 blur-[100px]" />
       </motion.div>
+      <div className="absolute inset-0">
+        <ParticleFieldCanvas />
+      </div>
     </div>
   );
 }

@@ -3,6 +3,10 @@
 import { Canvas } from "@react-three/fiber";
 import type { MotionValue } from "framer-motion";
 import { RobotHead } from "@/components/RobotHead";
+import SceneEffects from "@/components/SceneEffects";
+import { CameraRig } from "@/components/CameraRig";
+
+const CAMERA_POSITION: [number, number, number] = [0, 0.25, 4.4];
 
 export default function HeroScene({
   scrollProgress,
@@ -13,7 +17,7 @@ export default function HeroScene({
 }) {
   return (
     <Canvas
-      camera={{ position: [0, 0.25, 4.4], fov: 38 }}
+      camera={{ position: CAMERA_POSITION, fov: 38 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >
@@ -21,7 +25,9 @@ export default function HeroScene({
       <directionalLight position={[-3, 3, 4]} intensity={1.4} color="#00f0ff" />
       <directionalLight position={[3, -1, -3]} intensity={0.8} color="#7000ff" />
       <pointLight position={[0, 0.2, 2.4]} intensity={0.5} color="#ffffff" distance={4} />
+      <CameraRig basePosition={CAMERA_POSITION} />
       <RobotHead scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} />
+      <SceneEffects />
     </Canvas>
   );
 }

@@ -43,6 +43,7 @@ export function RobotHead({
   const antennaTipRef = useRef<THREE.Mesh>(null);
   const haloARef = useRef<THREE.Mesh>(null);
   const haloBRef = useRef<THREE.Mesh>(null);
+  const padRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
     const { x: pointerX, y: pointerY } = state.pointer;
@@ -134,6 +135,13 @@ export function RobotHead({
 
     if (haloARef.current) haloARef.current.rotation.z += delta * 0.25;
     if (haloBRef.current) haloBRef.current.rotation.z -= delta * 0.18;
+
+    if (padRef.current) {
+      const pulse = 1 + Math.sin(t * 1.4) * 0.05;
+      padRef.current.scale.set(pulse, pulse, 1);
+      const material = padRef.current.material as THREE.MeshBasicMaterial;
+      material.opacity = 0.22 + Math.sin(t * 1.4) * 0.06;
+    }
   });
 
   return (
@@ -189,6 +197,17 @@ export function RobotHead({
       <mesh ref={haloBRef} rotation={[Math.PI / 2.9, -0.6, 0]} scale={0.85}>
         <torusGeometry args={[1.05, 0.008, 8, 64]} />
         <meshBasicMaterial color="#7000ff" transparent opacity={0.3} />
+      </mesh>
+
+      <mesh ref={padRef} position={[0, -ROBOT_BOTTOM, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.55, 0.62, 48]} />
+        <meshBasicMaterial
+          color="#00f0ff"
+          transparent
+          opacity={0.24}
+          side={THREE.DoubleSide}
+          blending={THREE.AdditiveBlending}
+        />
       </mesh>
     </group>
   );
