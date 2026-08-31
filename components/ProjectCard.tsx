@@ -1,10 +1,16 @@
-import { TrendingUp } from "lucide-react";
+import { ArrowUpRight, TrendingUp } from "lucide-react";
 import type { Project } from "@/lib/data";
 import TiltCard from "@/components/TiltCard";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  onOpen,
+}: {
+  project: Project;
+  onOpen: () => void;
+}) {
   return (
-    <TiltCard className="p-6 hover:border-secondary-glow/30" spotlightColor="112,0,255">
+    <TiltCard className="p-6 hover:border-secondary-glow/30" spotlightColor="112,0,255" onClick={onOpen}>
       <div className="flex h-full flex-col gap-4">
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -15,10 +21,17 @@ export default function ProjectCard({ project }: { project: Project }) {
               {project.title}
             </h3>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-1 rounded-full border border-primary-glow/30 bg-primary-glow/10 px-3 py-1 text-xs font-semibold text-primary-glow">
-            <TrendingUp size={12} strokeWidth={2} />
-            {project.metricValue}
-          </span>
+          <div className="flex shrink-0 items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full border border-primary-glow/30 bg-primary-glow/10 px-3 py-1 text-xs font-semibold text-primary-glow">
+              <TrendingUp size={12} strokeWidth={2} />
+              {project.metricValue}
+            </span>
+            <ArrowUpRight
+              size={16}
+              strokeWidth={1.75}
+              className="text-white/20 transition-colors duration-300 group-hover:text-secondary-glow"
+            />
+          </div>
         </div>
 
         <p className="text-sm leading-relaxed text-muted">

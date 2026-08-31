@@ -1,9 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import { PROJECTS } from "@/lib/data";
 import ProjectCard from "@/components/ProjectCard";
 import Reveal from "@/components/Reveal";
 import { RevealGroup, RevealItem } from "@/components/RevealGroup";
+import DetailDrawer from "@/components/DetailDrawer";
+import ProjectDetailContent from "@/components/drawer/ProjectDetailContent";
 
 export default function Portfolio() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const openProject = openIndex !== null ? PROJECTS[openIndex] : null;
+
   return (
     <section
       id="casos-de-exito"
@@ -26,13 +34,25 @@ export default function Portfolio() {
         </Reveal>
 
         <RevealGroup className="mt-16 grid gap-6 sm:grid-cols-2">
-          {PROJECTS.map((project) => (
+          {PROJECTS.map((project, index) => (
             <RevealItem key={project.title} className="h-full">
-              <ProjectCard project={project} />
+              <ProjectCard project={project} onOpen={() => setOpenIndex(index)} />
             </RevealItem>
           ))}
         </RevealGroup>
       </div>
+
+      <DetailDrawer
+        open={openProject !== null}
+        onClose={() => setOpenIndex(null)}
+        eyebrow={openProject?.sector ?? "Casos de Éxito"}
+        title={openProject?.title ?? ""}
+        accent="secondary"
+      >
+        {openProject && (
+          <ProjectDetailContent project={openProject} onNavigate={() => setOpenIndex(null)} />
+        )}
+      </DetailDrawer>
     </section>
   );
 }

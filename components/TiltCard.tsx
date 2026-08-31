@@ -21,10 +21,13 @@ export default function TiltCard({
   children,
   className,
   spotlightColor = "0,240,255",
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
   spotlightColor?: string;
+  /** Si se pasa, la tarjeta entera se vuelve interactiva (click + teclado). */
+  onClick?: () => void;
 }) {
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -57,9 +60,23 @@ export default function TiltCard({
     <motion.div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
       style={{ rotateX, rotateY, transformPerspective: 800 }}
       className={cn(
         "group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-surface/60 backdrop-blur-xl transition-colors duration-300",
+        onClick && "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-glow/50",
         className
       )}
     >

@@ -1,9 +1,17 @@
+"use client";
+
+import { useState } from "react";
 import { SERVICES } from "@/lib/data";
 import ServiceCard from "@/components/ServiceCard";
 import Reveal from "@/components/Reveal";
 import { RevealGroup, RevealItem } from "@/components/RevealGroup";
+import DetailDrawer from "@/components/DetailDrawer";
+import ServiceDetailContent from "@/components/drawer/ServiceDetailContent";
 
 export default function Services() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const openService = openIndex !== null ? SERVICES[openIndex] : null;
+
   return (
     <section id="servicios" className="scroll-anchor relative px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -27,18 +35,30 @@ export default function Services() {
         </Reveal>
 
         <RevealGroup className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map(({ title, description, impact, icon: Icon }) => (
+          {SERVICES.map(({ title, description, impact, icon: Icon }, index) => (
             <RevealItem key={title} className="h-full">
               <ServiceCard
                 title={title}
                 description={description}
                 impact={impact}
                 icon={<Icon size={22} strokeWidth={1.75} />}
+                onOpen={() => setOpenIndex(index)}
               />
             </RevealItem>
           ))}
         </RevealGroup>
       </div>
+
+      <DetailDrawer
+        open={openService !== null}
+        onClose={() => setOpenIndex(null)}
+        eyebrow="Arquitectura Agéntica"
+        title={openService?.title ?? ""}
+      >
+        {openService && (
+          <ServiceDetailContent service={openService} onNavigate={() => setOpenIndex(null)} />
+        )}
+      </DetailDrawer>
     </section>
   );
 }

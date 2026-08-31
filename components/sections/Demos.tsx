@@ -1,11 +1,17 @@
+"use client";
+
+import { useState } from "react";
+import { DEMOS } from "@/lib/data";
 import DemoCard from "@/components/DemoCard";
 import Reveal from "@/components/Reveal";
 import { RevealGroup, RevealItem } from "@/components/RevealGroup";
-import ChatbotDemoVisual from "@/components/demos/ChatbotDemoVisual";
-import AgentDemoVisual from "@/components/demos/AgentDemoVisual";
-import WebDemoVisual from "@/components/demos/WebDemoVisual";
+import DetailDrawer from "@/components/DetailDrawer";
+import DemoDetailContent from "@/components/drawer/DemoDetailContent";
 
 export default function Demos() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const openDemo = openIndex !== null ? DEMOS[openIndex] : null;
+
   return (
     <section id="demos" className="scroll-anchor relative px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -26,37 +32,32 @@ export default function Demos() {
         </Reveal>
 
         <RevealGroup className="mt-16 grid gap-6 md:grid-cols-3">
-          <RevealItem className="h-full">
-            <DemoCard
-              category="Chatbot Conversacional"
-              name="Andes Repuestos"
-              description="Atención al cliente 24/7 con respuesta instantánea de stock y precios."
-            >
-              <ChatbotDemoVisual />
-            </DemoCard>
-          </RevealItem>
-
-          <RevealItem className="h-full">
-            <DemoCard
-              category="Agente de IA Autónomo"
-              name="Vitalia Salud"
-              description="Gestiona turnos, confirma disponibilidad y envía recordatorios sin intervención humana."
-            >
-              <AgentDemoVisual />
-            </DemoCard>
-          </RevealItem>
-
-          <RevealItem className="h-full">
-            <DemoCard
-              category="Desarrollo Web Dinámico"
-              name="Construred"
-              description="Panel de gestión de obras en tiempo real conectado a la operación."
-            >
-              <WebDemoVisual />
-            </DemoCard>
-          </RevealItem>
+          {DEMOS.map((demo, index) => {
+            const Visual = demo.visual;
+            return (
+              <RevealItem key={demo.name} className="h-full">
+                <DemoCard
+                  category={demo.category}
+                  name={demo.name}
+                  description={demo.description}
+                  onOpen={() => setOpenIndex(index)}
+                >
+                  <Visual />
+                </DemoCard>
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </div>
+
+      <DetailDrawer
+        open={openDemo !== null}
+        onClose={() => setOpenIndex(null)}
+        eyebrow={openDemo?.category ?? "Demos"}
+        title={openDemo?.name ?? ""}
+      >
+        {openDemo && <DemoDetailContent demo={openDemo} onNavigate={() => setOpenIndex(null)} />}
+      </DetailDrawer>
     </section>
   );
 }
