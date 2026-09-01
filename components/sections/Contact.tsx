@@ -33,14 +33,14 @@ export default function Contact() {
     <section id="contacto" className="scroll-anchor relative px-6 py-24">
       <div className="absolute inset-0 -z-10 bg-glow-gradient-violet" />
 
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-        <Reveal className="relative order-2 flex flex-col gap-8 lg:order-1">
-          <div className="h-64 w-full lg:h-96">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+        <Reveal className="relative flex min-w-0 flex-col gap-8">
+          <div className="h-64 w-full min-w-0 lg:h-96">
             <ContactCanvas />
           </div>
         </Reveal>
 
-        <Reveal delay={0.1} className="order-1 lg:order-2">
+        <Reveal delay={0.1} className="min-w-0">
           <span className="text-xs font-semibold uppercase tracking-wider text-primary-glow">
             Contacto
           </span>

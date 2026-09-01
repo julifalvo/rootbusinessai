@@ -16,6 +16,9 @@ const ROBOT_TOP = 1.2;
 const ROBOT_BOTTOM = 0.75;
 const ROBOT_WIDTH = 2.15;
 const FIT_MARGIN = 0.88;
+// En portrait el robot se ve más grande en relación al bloque de texto del
+// Hero (que ocupa más alto por los botones apilados): se encoge más.
+const FIT_MARGIN_MOBILE = 0.6;
 // Aire mínimo (fracción del alto visible) entre el robot y el borde inferior.
 const SAFE_BOTTOM = 0.06;
 
@@ -102,10 +105,11 @@ export function RobotHead({
       // Primero achicamos lo necesario para que quepa entero (alto y
       // ancho) y recién después lo bajamos: en mobile el robot es más
       // ancho que el viewport y se cortaba por los costados.
+      const fitMargin = aspect < 1 ? FIT_MARGIN_MOBILE : FIT_MARGIN;
       const fitScale = Math.min(
         1,
-        (viewH * FIT_MARGIN) / (ROBOT_TOP + ROBOT_BOTTOM),
-        (viewW * FIT_MARGIN) / ROBOT_WIDTH
+        (viewH * fitMargin) / (ROBOT_TOP + ROBOT_BOTTOM),
+        (viewW * fitMargin) / ROBOT_WIDTH
       );
       const targetScale = scale * fitScale * (1 - scroll * 0.32);
 
