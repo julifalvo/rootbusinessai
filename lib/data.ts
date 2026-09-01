@@ -151,7 +151,9 @@ export const initialContactState: ContactFormState = {
 export type Project = {
   title: string;
   sector: string;
-  description: string;
+  painPoint: string;
+  solutionShort: string;
+  resultMetric: string;
   stack: string[];
   metricValue: string;
   metricLabel: string;
@@ -167,8 +169,12 @@ export const PROJECTS: Project[] = [
   {
     title: "Soporte al Cliente 24/7",
     sector: "E-commerce & Retail",
-    description:
-      "Agente conversacional con RAG sobre catálogo y políticas de la tienda, escalando a humano solo en casos de excepción.",
+    painPoint:
+      "El equipo respondía cada consulta de stock y envíos a mano, con esperas de hasta 4 horas en fechas pico.",
+    solutionShort:
+      "Agente conversacional con RAG conectado al catálogo real, escalando a humano solo en casos de excepción.",
+    resultMetric:
+      "Pasaron de 4 horas a 12 segundos en la primera respuesta al cliente.",
     stack: ["Next.js", "LangChain", "OpenAI API", "PostgreSQL"],
     metricValue: "-65%",
     metricLabel: "tiempo de primera respuesta",
@@ -192,8 +198,12 @@ export const PROJECTS: Project[] = [
   {
     title: "Agente de Cobranza Inteligente",
     sector: "Fintech B2B",
-    description:
-      "Automatización multi-paso de recordatorios, negociación de planes de pago y escalamiento por WhatsApp y email.",
+    painPoint:
+      "La cartera vencida crecía porque el equipo no llegaba a contactar a tiempo a todos los clientes morosos.",
+    solutionShort:
+      "Agente que negocia planes de pago y escala por WhatsApp y email según el historial de cada cliente.",
+    resultMetric:
+      "Pasaron de dar por perdida esa cartera a recuperar un 38% más, sin sumar una sola persona.",
     stack: ["Python", "RAG", "Twilio", "Supabase"],
     metricValue: "+38%",
     metricLabel: "recupero de cartera",
@@ -217,8 +227,12 @@ export const PROJECTS: Project[] = [
   {
     title: "Plataforma de Turnos con IA",
     sector: "Salud Digital",
-    description:
-      "Reserva y confirmación de turnos con recordatorios proactivos y reprogramación automática vía agente conversacional.",
+    painPoint:
+      "3 de cada 10 turnos se perdían por ausentismo, con recordatorios manuales por teléfono.",
+    solutionShort:
+      "Reserva con confirmación proactiva y reprogramación automática vía agente conversacional.",
+    resultMetric:
+      "Pasaron de 30% de ausentismo a solo un 9%, recuperando esa facturación todos los meses.",
     stack: ["Next.js", "React Three Fiber", "Stripe", "Vercel"],
     metricValue: "-70%",
     metricLabel: "ausentismo a citas",
@@ -242,8 +256,12 @@ export const PROJECTS: Project[] = [
   {
     title: "RPA + IA para Logística",
     sector: "Logística Industrial",
-    description:
-      "Conexión de un ERP legacy con APIs de IA generativa para clasificar, validar y despachar órdenes sin intervención manual.",
+    painPoint:
+      "Cada orden de compra se clasificaba y cargaba a mano en un ERP de más de 15 años, con errores constantes.",
+    solutionShort:
+      "Conectamos el ERP legacy con IA generativa para clasificar, validar y despachar sin reemplazar nada.",
+    resultMetric:
+      "Pasaron de cargar órdenes a mano a liberar más de 40 horas semanales del equipo administrativo.",
     stack: ["n8n", "Python", "APIs ERP", "IA Generativa"],
     metricValue: "+40 hs",
     metricLabel: "semanales liberadas",

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PROJECTS } from "@/lib/data";
 import ProjectCard from "@/components/ProjectCard";
+import LogoStrip from "@/components/LogoStrip";
 import Reveal from "@/components/Reveal";
 import { RevealGroup, RevealItem } from "@/components/RevealGroup";
 import DetailDrawer from "@/components/DetailDrawer";
@@ -31,6 +32,7 @@ export default function Portfolio() {
               automatización operando en producción.
             </p>
           </div>
+          <LogoStrip />
         </Reveal>
 
         <RevealGroup className="mt-16 grid gap-6 sm:grid-cols-2">

@@ -39,17 +39,17 @@ export default function Hero() {
 
         <span className="inline-flex items-center gap-2 rounded-full border border-primary-glow/30 bg-primary-glow/10 px-4 py-1.5 text-xs font-medium tracking-wide text-primary-glow">
           <Sparkles size={14} strokeWidth={1.75} />
-          Sistemas Agénticos &amp; Automatización de Próxima Generación
+          Empleados digitales que trabajan 24/7 sin errores humanos
         </span>
 
         <h1 className="max-w-2xl bg-gradient-to-r from-white via-primary-glow to-secondary-glow bg-clip-text text-4xl font-bold tracking-tight text-transparent drop-shadow-[0_4px_28px_rgba(0,0,0,0.7)] sm:text-5xl md:text-6xl">
-          Escalamos tu negocio con Inteligencia Artificial Autónoma
+          Recuperá las horas y las ventas que perdés por procesos manuales
         </h1>
 
         <p className="max-w-xl text-balance text-base text-muted drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-lg">
-          Diseñamos agentes de IA, chatbots corporativos y desarrollos web a
-          medida que automatizan tu operación, desde PyMEs hasta grandes
-          empresas.
+          Construimos los sistemas que hacen el trabajo repetitivo por vos:
+          atienden clientes, cobran, agendan y despachan pedidos — mientras tu
+          equipo se dedica a lo que factura de verdad.
         </p>
 
         <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
@@ -71,6 +71,11 @@ export default function Hero() {
             Explorar Soluciones
           </a>
         </div>
+
+        <p className="text-xs text-white/50 drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+          ☕ 15 minutos por Google Meet. Sin compromiso técnico. Te llevamos un
+          diagnóstico de automatización listo.
+        </p>
       </motion.div>
     </section>
   );

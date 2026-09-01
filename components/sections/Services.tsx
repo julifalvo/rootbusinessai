@@ -21,15 +21,15 @@ export default function Services() {
             className="scroll-anchor mx-auto max-w-2xl text-center"
           >
             <span className="text-xs font-semibold uppercase tracking-wider text-primary-glow">
-              Arquitectura Agéntica
+              Lo que resolvemos
             </span>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Soluciones de IA que se adaptan a tu operación
+              Cuatro formas de dejar de perder tiempo y plata en tareas manuales
             </h2>
             <p className="mt-4 text-base text-muted">
-              Diseñamos cada agente como parte de un sistema mayor: percibe tu
-              operación, decide dentro de reglas de negocio definidas y actúa
-              sobre las herramientas que ya usás.
+              Cada sistema que construimos reemplaza una tarea repetitiva
+              concreta de tu operación — no una demo, un empleado digital que
+              ya está haciendo el trabajo en producción.
             </p>
           </div>
         </Reveal>
@@ -52,7 +52,7 @@ export default function Services() {
       <DetailDrawer
         open={openService !== null}
         onClose={() => setOpenIndex(null)}
-        eyebrow="Arquitectura Agéntica"
+        eyebrow="Lo que resolvemos"
         title={openService?.title ?? ""}
       >
         {openService && (

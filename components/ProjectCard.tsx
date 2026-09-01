@@ -34,9 +34,20 @@ export default function ProjectCard({
           </div>
         </div>
 
-        <p className="text-sm leading-relaxed text-muted">
-          {project.description}
-        </p>
+        <dl className="space-y-2.5 text-sm leading-relaxed">
+          <div className="flex gap-2">
+            <dt className="shrink-0 font-semibold text-white/40">Antes:</dt>
+            <dd className="text-muted">{project.painPoint}</dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="shrink-0 font-semibold text-white/40">Hicimos:</dt>
+            <dd className="text-muted">{project.solutionShort}</dd>
+          </div>
+          <div className="flex gap-2">
+            <dt className="shrink-0 font-semibold text-primary-glow">Resultado:</dt>
+            <dd className="font-medium text-white">{project.resultMetric}</dd>
+          </div>
+        </dl>
 
         <div className="mt-auto flex flex-wrap gap-2 border-t border-white/5 pt-4">
           {project.stack.map((tech) => (
