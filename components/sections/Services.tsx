@@ -35,12 +35,12 @@ export default function Services() {
         </Reveal>
 
         <RevealGroup className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map(({ title, description, impact, icon: Icon }, index) => (
+          {SERVICES.map(({ title, description, stats, icon: Icon }, index) => (
             <RevealItem key={title} className="h-full">
               <ServiceCard
                 title={title}
                 description={description}
-                impact={impact}
+                primaryStat={stats[0]}
                 icon={<Icon size={22} strokeWidth={1.75} />}
                 onOpen={() => setOpenIndex(index)}
               />

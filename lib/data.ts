@@ -19,7 +19,6 @@ export type Stat = {
 export type Service = {
   title: string;
   description: string;
-  impact: string;
   icon: LucideIcon;
   howItWorks: string[];
   stats: Stat[];
@@ -32,7 +31,6 @@ export const SERVICES: Service[] = [
     title: "Agentes de IA Autónomos",
     description:
       "Automatización de flujos de trabajo complejos multi-paso, con toma de decisiones propia dentro de reglas de negocio definidas.",
-    impact: "Hasta 80% menos intervención manual en procesos operativos.",
     icon: BrainCircuit,
     howItWorks: [
       "Mapeamos tu flujo operativo actual y detectamos los cuellos de botella donde una decisión repetitiva frena a tu equipo.",
@@ -56,7 +54,6 @@ export const SERVICES: Service[] = [
     title: "Chatbots Conversacionales Avanzados",
     description:
       "Integrados con RAG (Retrieval-Augmented Generation) y bases de datos corporativas para respuestas precisas y contextuales.",
-    impact: "Reducción del 70% en tiempos de atención al cliente.",
     icon: MessageSquareText,
     howItWorks: [
       "Indexamos tu catálogo, base de conocimiento y políticas internas en una capa de RAG propia.",
@@ -80,7 +77,6 @@ export const SERVICES: Service[] = [
     title: "Desarrollo Web Fullstack & Apps a Medida",
     description:
       "Plataformas web de alto rendimiento conectadas a modelos de lenguaje, diseñadas para escalar con tu operación.",
-    impact: "Lanzamiento de productos digitales hasta 3x más rápido.",
     icon: Code2,
     howItWorks: [
       "Relevamos el objetivo de negocio antes de tocar una línea de código: qué métrica tiene que moverse.",
@@ -104,7 +100,6 @@ export const SERVICES: Service[] = [
     title: "Automatización de Procesos (RPA + IA)",
     description:
       "Conexión de sistemas legacy con APIs de IA para eliminar tareas repetitivas sin reescribir tu infraestructura actual.",
-    impact: "+40 horas semanales liberadas de tareas repetitivas.",
     icon: Workflow,
     howItWorks: [
       "Auditamos tus sistemas legacy sin pedirte que los reemplaces — nos conectamos por API, RPA o ambos.",
