@@ -37,16 +37,14 @@ export default function Hero() {
       className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-20 md:pt-32"
     >
       <div className="absolute inset-0 -z-20 bg-glow-gradient" />
-      {/* Desktop: el robot es el fondo del Hero, con una máscara fija (no se
-          mueve con el parallax) para que el glow se desvanezca antes del borde.
-          Mobile: detrás del texto quedaba tapado por los botones, así que va
-          en su propio bloque debajo del CTA, sin parallax. */}
-      <div className="relative order-first -mb-2 h-44 w-full md:absolute md:inset-0 md:-z-10 md:order-none md:mt-0 md:h-auto md:[mask-image:linear-gradient(to_bottom,black_88%,transparent)]">
-        <motion.div style={isDesktop ? { y: canvasY } : undefined} className="absolute inset-0">
+      {/* El robot es el fondo del Hero, con una máscara fija (no se mueve con
+          el parallax) para que el glow se desvanezca antes del borde. */}
+      <div className="absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_88%,transparent)]">
+        <motion.div style={{ y: canvasY }} className="absolute inset-0">
           <HeroCanvas
             scrollProgress={scrollYProgress}
-            canvasOffsetY={isDesktop ? canvasY : undefined}
-            scale={isDesktop ? 0.65 : 0.5}
+            canvasOffsetY={canvasY}
+            scale={isDesktop ? 0.65 : 0.8}
           />
         </motion.div>
       </div>
