@@ -9,7 +9,8 @@ const NAV_LINKS = [
   { label: "Servicios", href: "#servicios" },
   { label: "Casos de Éxito", href: "#casos-de-exito" },
   { label: "Demos", href: "#demos" },
-  { label: "Soluciones", href: "#arquitectura-agentica" },
+  { label: "Cómo trabajamos", href: "#proceso" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
 ];
 

@@ -61,11 +61,12 @@ export default function Contact() {
             Contacto
           </span>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Hablemos de tu próximo agente de IA
+            Contanos qué tarea te está costando horas
           </h2>
           <p className="mt-4 max-w-md text-base text-muted">
-            Contanos sobre tu operación y te proponemos una arquitectura de
-            agentes o chatbot a medida en una consultoría inicial sin costo.
+            En una llamada de 15 minutos te decimos qué conviene automatizar
+            primero, cuánto te ahorra por mes y cuánto cuesta. Sin costo y sin
+            compromiso.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -84,7 +85,7 @@ export default function Contact() {
 
           <div className="mt-8 rounded-2xl border border-white/10 bg-surface/60 p-6 backdrop-blur-xl sm:p-8">
             <p className="mb-6 text-sm text-subtle">
-              O completá el formulario y te respondemos por correo:
+              O completá el formulario y te respondemos en menos de 24 hs hábiles:
             </p>
             <ContactForm />
           </div>

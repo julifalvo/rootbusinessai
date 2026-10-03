@@ -21,12 +21,11 @@ export default function Demos() {
               Demos
             </span>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Así se ven nuestras soluciones en acción
+              Probalo vos mismo antes de hablar con nosotros
             </h2>
             <p className="mt-4 text-base text-muted">
-              Demostraciones interactivas de agentes de IA, chatbots y
-              plataformas web — pensadas para mostrarte el tipo de
-              experiencia que podemos construir para tu negocio.
+              Hacé clic y mirá cómo responde, agenda y reporta. Es el mismo
+              tipo de sistema que vas a tener funcionando en tu negocio.
             </p>
           </div>
         </Reveal>

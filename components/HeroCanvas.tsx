@@ -18,9 +18,11 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
 export default function HeroCanvas({
   scrollProgress,
   canvasOffsetY,
+  scale,
 }: {
   scrollProgress?: MotionValue<number>;
   canvasOffsetY?: MotionValue<number>;
+  scale?: number;
 }) {
   const support = useWebglSupport();
 
@@ -30,7 +32,7 @@ export default function HeroCanvas({
 
   return (
     <Scene3DErrorBoundary fallback={<Scene3DFallback className="h-full w-full" />}>
-      <HeroScene scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} />
+      <HeroScene scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} scale={scale} />
     </Scene3DErrorBoundary>
   );
 }

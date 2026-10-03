@@ -28,9 +28,9 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    title: "Agentes de IA Autónomos",
+    title: "Empleados digitales para tu operación",
     description:
-      "Automatización de flujos de trabajo complejos multi-paso, con toma de decisiones propia dentro de reglas de negocio definidas.",
+      "Hacen las tareas repetitivas de tu equipo — cargar, revisar, aprobar, avisar — las 24 horas, sin errores y escalando a una persona cuando hace falta.",
     icon: BrainCircuit,
     howItWorks: [
       "Mapeamos tu flujo operativo actual y detectamos los cuellos de botella donde una decisión repetitiva frena a tu equipo.",
@@ -51,9 +51,9 @@ export const SERVICES: Service[] = [
     fomo: "Cada mes que un proceso sigue siendo manual, tu competencia que ya automatizó atiende más clientes con el mismo equipo. La brecha operativa entre empresas con agentes de IA y las que no los tienen se duplica año a año — y achicarla después cuesta mucho más que abrirla a tiempo.",
   },
   {
-    title: "Chatbots Conversacionales Avanzados",
+    title: "Atención y ventas por WhatsApp 24/7",
     description:
-      "Integrados con RAG (Retrieval-Augmented Generation) y bases de datos corporativas para respuestas precisas y contextuales.",
+      "Responde stock, precios y pedidos en segundos con la información real de tu negocio. Ninguna consulta queda sin contestar, ni a las 22 hs.",
     icon: MessageSquareText,
     howItWorks: [
       "Indexamos tu catálogo, base de conocimiento y políticas internas en una capa de RAG propia.",
@@ -74,9 +74,9 @@ export const SERVICES: Service[] = [
     fomo: "El 73% de los compradores abandona una consulta si no recibe respuesta en menos de 5 minutos. Mientras tu equipo duerme, un chatbot bien entrenado sigue cerrando conversaciones — y tus competidores que ya lo tienen no están perdiendo esas ventas.",
   },
   {
-    title: "Desarrollo Web Fullstack & Apps a Medida",
+    title: "Sistemas y paneles a medida",
     description:
-      "Plataformas web de alto rendimiento conectadas a modelos de lenguaje, diseñadas para escalar con tu operación.",
+      "Dejá el Excel: tu operación en un panel que se actualiza solo, accesible desde el celular, y listo para crecer con vos.",
     icon: Code2,
     howItWorks: [
       "Relevamos el objetivo de negocio antes de tocar una línea de código: qué métrica tiene que moverse.",
@@ -97,9 +97,9 @@ export const SERVICES: Service[] = [
     fomo: "Un producto digital que tarda 6 meses en salir ya nació viejo: la competencia que lanza en 6 semanas está iterando con datos reales mientras vos seguís en planos. La velocidad de lanzamiento hoy es la ventaja competitiva, no un detalle técnico.",
   },
   {
-    title: "Automatización de Procesos (RPA + IA)",
+    title: "Automatización sin cambiar tus sistemas",
     description:
-      "Conexión de sistemas legacy con APIs de IA para eliminar tareas repetitivas sin reescribir tu infraestructura actual.",
+      "Conectamos tu ERP o planillas actuales para que la carga manual desaparezca. No reemplazás nada ni frenás la operación.",
     icon: Workflow,
     howItWorks: [
       "Auditamos tus sistemas legacy sin pedirte que los reemplaces — nos conectamos por API, RPA o ambos.",
@@ -171,8 +171,8 @@ export const PROJECTS: Project[] = [
     resultMetric:
       "Pasaron de 4 horas a 12 segundos en la primera respuesta al cliente.",
     stack: ["Next.js", "LangChain", "OpenAI API", "PostgreSQL"],
-    metricValue: "-65%",
-    metricLabel: "tiempo de primera respuesta",
+    metricValue: "12 seg",
+    metricLabel: "primera respuesta (antes 4 hs)",
     challenge:
       "El equipo de atención al cliente respondía manualmente cada consulta de stock, envío y devoluciones, con picos de espera de hasta 4 horas en fechas de alta demanda.",
     solution:
@@ -228,7 +228,7 @@ export const PROJECTS: Project[] = [
       "Reserva con confirmación proactiva y reprogramación automática vía agente conversacional.",
     resultMetric:
       "Pasaron de 30% de ausentismo a solo un 9%, recuperando esa facturación todos los meses.",
-    stack: ["Next.js", "React Three Fiber", "Stripe", "Vercel"],
+    stack: ["Next.js", "WhatsApp API", "Google Calendar", "Vercel"],
     metricValue: "-70%",
     metricLabel: "ausentismo a citas",
     challenge:
@@ -359,5 +359,44 @@ export const DEMOS: Demo[] = [
       role: "Construred",
     },
     fomo: "Una obra que se atrasa y nadie lo nota a tiempo cuesta multiplicado: horas extra, materiales parados, plazos incumplidos. Las constructoras que ya visualizan su operación en tiempo real corrigen el rumbo en días; las que siguen con Excel, lo descubren cuando ya es tarde y caro.",
+  },
+];
+
+export type Faq = {
+  question: string;
+  answer: string;
+};
+
+/** Objeciones reales de un dueño de PyME antes de agendar. Se usan en la sección FAQ y en el JSON-LD. */
+export const FAQS: Faq[] = [
+  {
+    question: "¿Cuánto cuesta?",
+    answer:
+      "Depende del proceso, pero siempre arrancamos por uno solo y acotado, con precio cerrado antes de empezar. En la llamada de diagnóstico te damos un rango concreto y cuánto te ahorra por mes, para que veas el retorno antes de decidir.",
+  },
+  {
+    question: "¿Tengo que cambiar mis sistemas actuales?",
+    answer:
+      "No. Nos conectamos a lo que ya usás — ERP, planillas, WhatsApp, CRM — por API o automatización. Tu equipo sigue trabajando igual mientras implementamos.",
+  },
+  {
+    question: "¿Qué pasa si la IA se equivoca?",
+    answer:
+      "Definimos con vos qué puede resolver sola y qué tiene que pasar a una persona. Cada acción queda registrada para que la puedas auditar, y ante la duda el sistema escala en vez de inventar.",
+  },
+  {
+    question: "¿Cuánto tarda en estar funcionando?",
+    answer:
+      "El primer proceso automatizado suele estar en producción entre 2 y 6 semanas. No es un proyecto de un año: medimos resultados desde el primer mes.",
+  },
+  {
+    question: "Mi equipo no es técnico, ¿lo van a poder usar?",
+    answer:
+      "Sí. Lo diseñamos para que tu equipo lo use desde WhatsApp o un panel simple, y lo capacitamos. Además documentamos todo para que no dependas de nosotros.",
+  },
+  {
+    question: "¿Mis datos y los de mis clientes están seguros?",
+    answer:
+      "Trabajamos con acuerdos de confidencialidad, acceso mínimo necesario a tus sistemas y proveedores de IA que no entrenan modelos con tus datos.",
   },
 ];

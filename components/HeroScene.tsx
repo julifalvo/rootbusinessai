@@ -11,9 +11,11 @@ const CAMERA_POSITION: [number, number, number] = [0, 0.25, 4.4];
 export default function HeroScene({
   scrollProgress,
   canvasOffsetY,
+  scale,
 }: {
   scrollProgress?: MotionValue<number>;
   canvasOffsetY?: MotionValue<number>;
+  scale?: number;
 }) {
   return (
     <Canvas
@@ -26,7 +28,7 @@ export default function HeroScene({
       <directionalLight position={[3, -1, -3]} intensity={0.8} color="#7000ff" />
       <pointLight position={[0, 0.2, 2.4]} intensity={0.5} color="#ffffff" distance={4} />
       <CameraRig basePosition={CAMERA_POSITION} />
-      <RobotHead scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} />
+      <RobotHead scale={scale} scrollProgress={scrollProgress} canvasOffsetY={canvasOffsetY} />
       <SceneEffects />
     </Canvas>
   );

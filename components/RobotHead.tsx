@@ -18,9 +18,15 @@ const ROBOT_WIDTH = 2.15;
 const FIT_MARGIN = 0.88;
 // En portrait el robot se ve más grande en relación al bloque de texto del
 // Hero (que ocupa más alto por los botones apilados): se encoge más.
-const FIT_MARGIN_MOBILE = 0.6;
+const FIT_MARGIN_MOBILE = 0.42;
 // Aire mínimo (fracción del alto visible) entre el robot y el borde inferior.
-const SAFE_BOTTOM = 0.06;
+const SAFE_BOTTOM = 0.12;
+// Cuánto baja de verdad el robot bajo su centro: con la cabeza inclinada
+// (scroll + puntero) las esquinas del cubo y la perspectiva sobrepasan
+// ROBOT_BOTTOM, que es solo la base en reposo.
+const ROBOT_DROP_EXTENT = 0.95;
+
+const ndcBottom = new THREE.Vector3();
 
 /**
  * Cabeza de robot construida enteramente con primitivas (sin assets
@@ -119,16 +125,24 @@ export function RobotHead({
       const clipped =
         Math.max(0, canvasOffsetY?.get() ?? 0) * (viewH / state.size.height);
 
+      // Borde inferior visible en el plano z=0. La cámara no mira a y=0
+      // (CameraRig la apunta un poco más arriba), así que no es -viewH/2:
+      // se proyecta el centro inferior de la pantalla sobre ese plano.
+      const { camera } = state;
+      ndcBottom.set(0, -1, 0.5).unproject(camera).sub(camera.position);
+      const bottomY = camera.position.y + ndcBottom.y * (-camera.position.z / ndcBottom.z);
+
       // En viewports verticales el bloque de texto del Hero tapa el centro:
       // bajamos el robot para que asome debajo, pero dejando aire hasta el
       // borde inferior — pegado al borde, la sección siguiente lo corta.
       const wantedDrop = (aspect < 1 ? (1 - aspect) * 2.05 : 0) + scroll * 0.4;
       const maxDrop = Math.max(
         0,
-        viewH * (0.5 - SAFE_BOTTOM) -
-          ROBOT_BOTTOM * targetScale -
-          Math.abs(float) -
-          clipped
+        -(bottomY + viewH * SAFE_BOTTOM + clipped) -
+          // La escala real se amortigua hacia targetScale: mientras es más
+          // grande (primer frame, volver a scrollear arriba) también cuenta.
+          ROBOT_DROP_EXTENT * Math.max(targetScale, bodyRef.current.scale.x) -
+          Math.abs(float)
       );
 
       bodyRef.current.position.y = float - Math.min(wantedDrop, maxDrop);
